@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MTUCI RadioLab — инженерная радиотехническая лаборатория</title>
+<meta name="description" content="MTUCI RadioLab — инженерный программный комплекс для расчётов, моделирования и анализа радиотехнических систем: RLC, АЧХ/ФЧХ, ЦОС, радиолиния, антенны и лабораторные работы.">
+<meta name="keywords" content="MTUCI RadioLab, МТУСИ, радиотехника, RLC, АЧХ, ФЧХ, ЦОС, DSP, радиолиния, антенны, лабораторные работы">
+<meta name="author" content="Шарофидинзода Мухаммадрофе Абдурауф">
+<meta name="robots" content="index, follow">
+<link rel="icon" href="assets/favicon.ico">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar"><div class="brand">⬡ MTUCI RadioLab</div><nav><a href="#home">Главная</a><a href="#modules">Модули</a><a href="#developer">Разработчик</a></nav></header>
+<div class="layout">
+<aside class="sidebar">
+  <div class="side-brand">MTUCI<br>RadioLab</div>
+  <div class="side-sub">Инженерная радиотехническая лаборатория</div>
+  <button class="nav active" data-page="home">⌂ Главная</button>
+  <button class="nav" data-page="rlc">⌁ RLC и цепи</button>
+  <button class="nav" data-page="response">∿ АЧХ / ФЧХ</button>
+  <button class="nav" data-page="dsp">▦ ЦОС</button>
+  <button class="nav" data-page="link">◉ Радиолиния</button>
+  <button class="nav" data-page="antenna">⌁ Антенны</button>
+  <button class="nav" data-page="labs">▣ Лабораторные работы</button>
+  <div class="side-dev"><img src="assets/developer.png" alt="Фото разработчика"><b>Разработчик</b><span>Шарофидинзода Мухаммадрофе Абдурауф</span><small>Студент МТУСИ • БРР2401</small></div>
+</aside>
+<main class="main">
+<section id="home" class="page active"><div class="hero"><h1>Добро пожаловать в MTUCI RadioLab!</h1><p>Инженерный комплекс для расчётов, моделирования и анализа радиотехнических систем.</p></div>
+<div id="modules" class="grid cards">
+  <div class="card"><h2>RLC и цепи</h2><p>Расчёт резонанса, импеданса и АЧХ последовательной RLC-цепи.</p><button onclick="openPage('rlc')">Открыть →</button></div>
+  <div class="card"><h2>АЧХ / ФЧХ</h2><p>Анализ частотных характеристик дискретной системы второго порядка.</p><button onclick="openPage('response')">Открыть →</button></div>
+  <div class="card"><h2>ЦОС</h2><p>Генерация сигнала, шум, FFT и анализ цифрового сигнала.</p><button onclick="openPage('dsp')">Открыть →</button></div>
+  <div class="card"><h2>Радиолиния</h2><p>Длина волны, FSPL и мощность приёма.</p><button onclick="openPage('link')">Открыть →</button></div>
+  <div class="card"><h2>Антенны</h2><p>λ/4, λ/2 и базовые параметры антенн.</p><button onclick="openPage('antenna')">Открыть →</button></div>
+  <div class="card"><h2>Лабораторные работы</h2><p>Расчёты, таблицы, графики и подготовка отчёта.</p><button onclick="openPage('labs')">Открыть →</button></div>
+</div>
+<div id="developer" class="card developer"><img src="assets/developer.png" alt="Разработчик"><div><h2>Информация о разработчике</h2><p><b>Разработал:</b> Шарофидинзода Мухаммадрофе Абдурауф</p><p>Студент МТУСИ, группа БРР2401</p><p>MTUCI RadioLab — инженерный программный комплекс.</p></div></div>
+</section>
+<section id="rlc" class="page"><div class="heading"><h1>RLC и цепи</h1><p>Расчёт резонанса и АЧХ последовательной RLC-цепи.</p></div><div class="two"><div class="card form"><h2>Параметры</h2><label>R, Ом<input id="R" value="100"></label><label>L, Гн<input id="L" value="0.001"></label><label>C, Ф<input id="C" value="0.000001"></label><label>f min, Гц<input id="fmin" value="10"></label><label>f max, Гц<input id="fmax" value="1000000"></label><button onclick="calcRLC()">▶ Рассчитать</button></div><div class="card"><h2>Результаты</h2><div id="rlcResult" class="result"></div></div></div><div class="card chart-card"><canvas id="rlcCanvas" height="360"></canvas></div></section>
+<section id="response" class="page"><div class="heading"><h1>АЧХ / ФЧХ</h1><p>Анализ дискретной линейной системы второго порядка.</p></div><div class="card form"><div class="five"><label>b0<input id="b0" value="1.1"></label><label>b1<input id="b1" value="-1.66782"></label><label>b2<input id="b2" value="0.88"></label><label>a1<input id="a1" value="1.5278"></label><label>a2<input id="a2" value="0.82"></label></div><button onclick="calcResponse()">Рассчитать АЧХ / ФЧХ</button></div><div class="card chart-card"><canvas id="responseCanvas" height="380"></canvas></div></section>
+<section id="dsp" class="page"><div class="heading"><h1>ЦОС</h1><p>Генерация сигнала, шум и спектральный анализ.</p></div><div class="card form"><div class="four"><label>Частота, Гц<input id="dspFreq" value="1000"></label><label>fs, Гц<input id="dspFs" value="30000"></label><label>Отсчётов<input id="dspN" value="1024"></label><label>Шум RMS<input id="dspNoise" value="0.10"></label></div><button onclick="calcDSP()">Смоделировать сигнал</button></div><div class="two"><div class="card chart-card"><h2>Сигнал</h2><canvas id="dspTime" height="300"></canvas></div><div class="card chart-card"><h2>FFT / спектр</h2><canvas id="dspFFT" height="300"></canvas></div></div></section>
+<section id="link" class="page"><div class="heading"><h1>Радиолиния</h1><p>Расчёт длины волны, потерь в свободном пространстве и мощности приёма.</p></div><div class="card form"><div class="five"><label>Частота, Гц<input id="linkFreq" value="2400000000"></label><label>Расстояние, м<input id="linkDist" value="1000"></label><label>Pt, Вт<input id="linkPt" value="1"></label><label>Gt<input id="linkGt" value="1"></label><label>Gr<input id="linkGr" value="1"></label></div><button onclick="calcLink()">Рассчитать радиолинию</button></div><div id="linkResult" class="card result big"></div></section>
+<section id="antenna" class="page"><div class="heading"><h1>Антенны</h1><p>Базовые расчёты размеров антенн по длине волны.</p></div><div class="card form"><label>Частота, Гц<input id="antFreq" value="100000000"></label><button onclick="calcAntenna()">Рассчитать</button></div><div id="antResult" class="card result big"></div></section>
+<section id="labs" class="page"><div class="heading"><h1>Лабораторные работы</h1><p>Раздел для подготовки расчётов, результатов и материалов отчёта.</p></div><div class="card"><h2>Студент</h2><p><b>Шарофидинзода Мухаммадрофе Абдурауф</b><br>МТУСИ • БРР2401</p></div><div class="grid"><div class="card"><h2>Лабораторная работа №1</h2><p>Расчёты и основные параметры.</p></div><div class="card"><h2>Лабораторная работа №2</h2><p>ЦОС, ЛДС, АЧХ/ФЧХ, импульсная характеристика.</p></div><div class="card"><h2>Лабораторная работа №3</h2><p>Моделирование и анализ сигналов.</p></div><div class="card"><h2>Новая лабораторная работа</h2><p>Заготовка для будущих работ.</p></div></div></section>
+<footer>Готово к работе • MTUCI RadioLab • Python / PySide6 / NumPy / Matplotlib • Веб-версия</footer>
+</main></div>
+<script src="app.js"></script>
+</body></html>
